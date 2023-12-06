@@ -89,7 +89,7 @@ function App() {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
 
-    const prayerTimesURL = `http://api.aladhan.com/v1/calendarByAddress/${year}/${month}?address=${encodeURIComponent(
+    const prayerTimesURL = ` https://api.aladhan.com/v1/calendarByAddress/${year}/${month}?address=${encodeURIComponent(
       address
     )}&method=3`;
 
