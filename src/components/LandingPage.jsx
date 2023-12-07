@@ -97,7 +97,11 @@ function LandingPage() {
 
     return fetch(prayerTimesURL);
   };
-
+  const digitalClockStyle = {
+    /* ... (other styles) */
+    width: "100%", // Adjust width as needed
+    fontSize: "calc(14px + 2vw)", // Responsive font size based on the viewport width
+  };
   const handlePrayerCheck = prayer => {
     const updatedChecked = {
       ...checkedPrayers,
@@ -119,9 +123,9 @@ function LandingPage() {
     <div className="App">
       <h1>Bönetider Åstorp</h1>
       <div className="digital-clock-container">
-        <div className="digital-clock">
+        <div className="digital-clock" style={digitalClockStyle}>
           <h2>{formatTime(currentTime)}</h2>
-        </div>
+        </div>{" "}
       </div>
       {loading && <p>Loading...</p>}
       {Object.keys(prayerTimes).length > 0 && (

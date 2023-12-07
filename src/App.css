@@ -16,6 +16,7 @@
   background-image: url("https://images.unsplash.com/photo-1601480305171-622556cbd0ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-size: cover; /* Adjust as needed */
   background-color: rgba(0, 0, 0, 0.4);
+  overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
 }
 
 h1 {
@@ -33,11 +34,11 @@ h2 {
   padding: 10px;
   border-radius: 10px;
   align-items: center;
+  display: flex;
   justify-content: center;
   margin-bottom: 20px;
   text-align: center;
-
-  display: inline-block; /* Keeps the width to content */
+  width: 100%; /* Set width to 100% */
 }
 
 .digital-clock h2 {
@@ -47,7 +48,8 @@ h2 {
   text-align: center;
   font-size: 26px;
   margin: 0;
-  width: 385px; /* Adjust the width as needed */
+  width: 100%; /* Set width to 100% */
+  font-size: calc(14px + 2vw);
 }
 
 .prayer-times-list {
@@ -106,4 +108,18 @@ h2 {
   color: white;
   font-size: 14px;
   margin-top: 5px;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
 }

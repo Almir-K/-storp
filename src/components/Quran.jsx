@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../App.css";
 
 function Quran() {
   const [loading, setLoading] = useState(true);
@@ -10,7 +11,8 @@ function Quran() {
     height: "152px", // Set the height of iframes
     margin: "10px", // Center horizontally
     display: "block", // Make sure iframes are block elements
-    visibility: loading ? "hidden" : "visible",
+    opacity: loading ? 0 : 1, // Hide iframes while loading
+    transition: "opacity 0.3s ease-in-out", // Smooth transition when loading
   };
 
   const skeletonStyle = {
@@ -21,7 +23,20 @@ function Quran() {
     borderRadius: "12px",
     backgroundColor: "#ccc",
     display: loading ? "block" : "none",
-    animation: loading ? "pulse 1.5s infinite" : "none",
+    position: "relative",
+    overflow: "hidden",
+  };
+
+  const pulseStyle = {
+    position: "absolute",
+    content: '""',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: "12px",
+    backgroundColor: "#eee",
+    animation: "pulse 1.5s infinite",
   };
 
   const containerStyle = {
@@ -31,6 +46,9 @@ function Quran() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center", // Align items at the center horizontally
   };
 
   const buttonStyle = {
@@ -45,10 +63,15 @@ function Quran() {
     border: "none",
   };
 
+  const handleLoad = () => {
+    setLoading(false);
+  };
+
   useEffect(() => {
+    // Simulating loading for 2 seconds
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Simulating loading for 2 seconds
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -60,8 +83,10 @@ function Quran() {
         Tillbaka
       </a>
       {/* Skeleton Loader */}
-      {[...Array(9)].map((_, index) => (
-        <div key={index} style={skeletonStyle}></div>
+      {Array.from({ length: 9 }).map((_, index) => (
+        <div key={index} style={skeletonStyle}>
+          <div style={pulseStyle}></div>
+        </div>
       ))}
       {/* Iframes with Skeleton Loader */}
       {/* Iframe 1 */}
@@ -71,8 +96,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe1"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 2 */}
       <iframe
@@ -81,8 +106,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe2"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 3 */}
       <iframe
@@ -91,8 +116,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe3"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 4 */}
       <iframe
@@ -101,8 +126,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe4"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 5 */}
       <iframe
@@ -111,8 +136,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe5"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 6 */}
       <iframe
@@ -121,8 +146,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe6"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 7 */}
       <iframe
@@ -131,8 +156,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe7"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 8 */}
       <iframe
@@ -141,8 +166,8 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe8"
+        onLoad={handleLoad}
       ></iframe>
       {/* Iframe 9 */}
       <iframe
@@ -151,18 +176,15 @@ function Quran() {
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="iframe9"
+        onLoad={handleLoad}
       ></iframe>
-      <div>
-        {/* Cool Button */}
-        <a
-          href="https://open.spotify.com/show/4jUR6E3ZST5NmHDTNdk3EW"
-          style={buttonStyle}
-        >
-          Lyssna på mer Quran här🎧📿
-        </a>
-      </div>
+      <a
+        href="https://open.spotify.com/show/4jUR6E3ZST5NmHDTNdk3EW"
+        style={buttonStyle}
+      >
+        Lyssna på mer Quran här🎧📿
+      </a>
     </div>
   );
 }
